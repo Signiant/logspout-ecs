@@ -11,7 +11,7 @@
     "containerDefinitions": [
         {
             "name": "logspout-task",
-            "image": "signiantdevops/logspout-ecs:latest",
+            "image": "signiant/logspout-ecs:latest",
             "cpu": 10,
             "memory": 10,
             "portMappings": [
