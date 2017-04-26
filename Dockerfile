@@ -1,4 +1,4 @@
-FROM gliderlabs/logspout:master
+FROM gliderlabs/logspout:v3.2.1
 ENTRYPOINT ["/ecs-entry.sh"]
 
 COPY ecs-entry.sh /ecs-entry.sh
