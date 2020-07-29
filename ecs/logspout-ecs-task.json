@@ -25,7 +25,7 @@
 			],
 			"environment": [
 				{ "name": "SYSLOG_HOSTNAME", "value": "logspout-dev" },
-				{ "name": "SYSLOG_FORMAT", "value": "rfc3164" }
+				{ "name": "SYSLOG_FORMAT", "value": "rfc5424" }
 			],
             "essential": true,
 			"mountPoints": [
