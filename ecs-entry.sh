@@ -4,14 +4,13 @@
 if [ ! -z "$OFF_AWS" ]; then
         echo "Not running on AWS - will not get the instance ID"
 else
-        INST=`wget -q -O - http://169.254.169.254/latest/meta-data/instance-id`
+        TOKEN=$(curl -sX PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 60")
+        INSTANCE_ID=$(curl -s -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/instance-id)
 fi
 
 # append the instance ID to an already set syslog hostname
-if [ ! -z "$INST" ]; then
-        if [ ! -z "$SYSLOG_HOSTNAME" ]; then
-                SYSLOG_HOSTNAME=${SYSLOG_HOSTNAME}_$INST
-        fi
+if [ -n "$INSTANCE_ID" ] && [ -n "$SYSLOG_HOSTNAME" ]; then
+        SYSLOG_HOSTNAME=${SYSLOG_HOSTNAME}_$INSTANCE_ID
 else
         SYSLOG_HOSTNAME=${SYSLOG_HOSTNAME}
 fi
